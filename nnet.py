@@ -29,24 +29,6 @@ scaler = StandardScaler()
 x_train = scaler.fit_transform(x_train)
 x_test = scaler.fit_transform(x_test)
 
-# no_of_layers = [1,2,3]
-# no_of_neurons = [15,20,25]
-#
-# rmse_list = []
-# mae_list = []
-# r2_list = []
-
-# for i in no_of_layers:
-#     for j in no_of_neurons:
-#         nnet = Sequential()
-#         nnet.add(Dense(j, input_dim=x_train.shape[1], activation="relu"))
-#         if i == 2:
-#             nnet.add(Dense(j-10, activation="relu"))
-#         if i == 3:
-#             nnet.add(Dense(j - 5, activation="relu"))
-#             nnet.add(Dense(j - 10, activation="relu"))
-#         nnet.add(Dense(1, activation="linear"))
-
 nnet = Sequential()
 nnet.add(Dense(25, input_dim=x_train.shape[1], activation="relu"))
 nnet.add(Dense(15, activation="relu"))
@@ -63,11 +45,6 @@ nnet.pred = nnet.predict(x_test)
 mae = round(mean_absolute_error(y_test, nnet.pred), 3)
 rmse = round(math.sqrt(mean_squared_error(y_test, nnet.pred)), 3)
 r2 = round(r2_score(y_test, nnet.pred), 6)
-
-# rmse_list.append(rmse)
-# mae_list.append(mae)
-# r2_list.append(r2)
-
 
 print(f"RMSE: {rmse}")
 print(f"MAE: {mae}")
@@ -86,7 +63,3 @@ plt.xlabel('First 30 observations in test subset')
 plt.ylabel('Total.week.diff.(t)')
 plt.legend()
 plt.show()
-
-# print(f"Index of minimal RMSE: {rmse_list.index(min(rmse_list))}, RMSE: {min(rmse_list)}")
-# print(f"Index of minimal MAE: {mae_list.index(min(mae_list))}, MAE: {min(mae_list)}")
-# print(f"Index of maximal R2: {r2_list.index(max(r2_list))}, R2: {max(r2_list)}")
